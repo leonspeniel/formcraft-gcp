@@ -1,0 +1,293 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Form Builder API",
+    "version": "1.0.0",
+    "description": "Stateless backend JSON endpoints supporting user registration, authentication, dynamic form creation, and filling."
+  },
+  "paths": {
+    "/api/v1/auth/signup": {
+      "post": {
+        "summary": "User Registration",
+        "description": "Registers a new user and hashes their password.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password", "full_name"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string", "minLength": 8 },
+                  "full_name": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "email": { "type": "string" },
+                    "full_name": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Email already exists" }
+        }
+      }
+    },
+    "/api/v1/auth/signin": {
+      "post": {
+        "summary": "User Authenticate & Sign-In",
+        "description": "Returns a JWT access token on success.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": { "type": "string" },
+                    "token_type": { "type": "string", "example": "bearer" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/api/v1/forms": {
+      "get": {
+        "summary": "List User's Created Forms",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Array of forms created by the logged-in user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string", "format": "uuid" },
+                      "title": { "type": "string" },
+                      "description": { "type": "string" },
+                      "is_published": { "type": "boolean" },
+                      "created_at": { "type": "string", "format": "date-time" },
+                      "submissions_count": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create dynamic Form",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "questions"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "questions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["question_text", "question_type", "is_required", "order_index"],
+                      "properties": {
+                        "question_text": { "type": "string" },
+                        "question_type": { "type": "string", "enum": ["text", "checkbox", "radio"] },
+                        "is_required": { "type": "boolean" },
+                        "order_index": { "type": "integer" },
+                        "options": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Form published and created successfully" }
+        }
+      }
+    },
+    "/api/v1/forms/{id}": {
+      "get": {
+        "summary": "Get Public Form Schema",
+        "description": "Allows visitors (and logged-in users) to view form questions. No credentials required.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the form, excluding credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string", "format": "uuid" },
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "questions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "question_text": { "type": "string" },
+                          "question_type": { "type": "string" },
+                          "is_required": { "type": "boolean" },
+                          "order_index": { "type": "integer" },
+                          "options": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "Form not found" }
+        }
+      }
+    },
+    "/api/v1/forms/{id}/submissions": {
+      "get": {
+        "summary": "View Submissions for a Form",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tabular submission answers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "responder_name": { "type": "string" },
+                      "responder_email": { "type": "string" },
+                      "submitted_at": { "type": "string", "format": "date-time" },
+                      "answers": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "question_id": { "type": "integer" },
+                            "value": { "type": "object" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": { "description": "Unauthorized to view submissions" }
+        }
+      },
+      "post": {
+        "summary": "Submit Form Answers",
+        "description": "Submits answers. Accepts optional authentication headers to pre-fill responder identity.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["responder_name", "responder_email", "answers"],
+                "properties": {
+                  "responder_name": { "type": "string" },
+                  "responder_email": { "type": "string", "format": "email" },
+                  "answers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["question_id", "value"],
+                      "properties": {
+                        "question_id": { "type": "integer" },
+                        "value": { "type": "object" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Submission created successfully" },
+          "422": { "description": "Validation failed" }
+        }
+      }
+    }
+  }
+}
