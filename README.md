@@ -1,5 +1,8 @@
 # FormCraft - Dynamic Form Builder & Filling Platform
 
+### 🚀 Developed and Deployed Entirely by AI
+*This project was designed, coded, tested, and deployed entirely using the **Antigravity AI agent platform**—without a single manual edit made inside the IDE.*
+
 FormCraft is a premium, full-stack dynamic questionnaire and analytics platform designed with a glassmorphism dark theme. Build interactive forms with incremental question additions, distribute shareable UUID links, and track responses in real time.
 
 ---
