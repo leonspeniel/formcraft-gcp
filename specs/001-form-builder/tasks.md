@@ -78,12 +78,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T018 [P] [US2] Create Form and Question database models inside `/backend/src/models/form.py`
-- [ ] T019 [P] [US2] Implement Form and Question schemas at `/backend/src/schemas/form.py`
-- [ ] T020 [US2] Implement Form publication endpoint and database persistence at `/backend/src/api/forms.py`
-- [ ] T021 [P] [US2] Create dynamic Question Addition interactive component at `/frontend/src/components/FormBuilder.tsx`
-- [ ] T022 [P] [US2] Build Form Creation dashboard workspace page wrapper at `/frontend/src/app/create/page.tsx`
-- [ ] T023 [US2] Integrate Form designer client fetch handlers inside `/frontend/src/services/forms.ts`
+- [x] T018 [P] [US2] Create Form and Question database models inside `/backend/src/models/form.py`
+- [x] T019 [P] [US2] Implement Form and Question schemas at `/backend/src/schemas/form.py`
+- [x] T020 [US2] Implement Form publication endpoint and database persistence at `/backend/src/api/forms.py`
+- [x] T021 [P] [US2] Create dynamic Question Addition interactive component at `/frontend/src/components/FormBuilder.tsx`
+- [x] T022 [P] [US2] Build Form Creation dashboard workspace page wrapper at `/frontend/src/app/create/page.tsx`
+- [x] T023 [US2] Integrate Form designer client fetch handlers inside `/frontend/src/services/forms.ts`
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently.
 

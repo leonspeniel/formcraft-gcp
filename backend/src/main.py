@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from src.api.auth import router as auth_router
+from src.api.forms import router as forms_router
 import logging
 
 # Configure centralized logging format
@@ -20,6 +21,7 @@ app = FastAPI(
 
 # Register endpoints routers
 app.include_router(auth_router)
+app.include_router(forms_router)
 
 # Configure CORS Middleware allowing local frontend communication
 app.add_middleware(
