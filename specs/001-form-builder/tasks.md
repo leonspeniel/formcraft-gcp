@@ -40,12 +40,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T006 Setup SQLAlchemy PostgreSQL engine connection pooling at `/backend/src/database.py`
-- [ ] T007 Initialize database migration management and scripts with Alembic at `/backend/alembic.ini`
-- [ ] T008 [P] Configure standard routing configurations and error middleware inside `/backend/src/main.py`
-- [ ] T009 [P] Implement password hashing and stateless JWT utilities in `/backend/src/utils/security.py`
-- [ ] T010 Implement current authenticated user resolution in `/backend/src/utils/auth_deps.py`
-- [ ] T011 Create shared HTTP Axios fetch client module at `/frontend/src/services/api.ts`
+- [x] T006 Setup SQLAlchemy PostgreSQL engine connection pooling at `/backend/src/database.py`
+- [x] T007 Initialize database migration management and scripts with Alembic at `/backend/alembic.ini`
+- [x] T008 [P] Configure standard routing configurations and error middleware inside `/backend/src/main.py`
+- [x] T009 [P] Implement password hashing and stateless JWT utilities in `/backend/src/utils/security.py`
+- [x] T010 Implement current authenticated user resolution in `/backend/src/utils/auth_deps.py`
+- [x] T011 Create shared HTTP Axios fetch client module at `/frontend/src/services/api.ts`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel.
 
