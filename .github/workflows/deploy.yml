@@ -41,7 +41,7 @@ jobs:
       - name: Build and Push Frontend Image
         run: |
           FRONTEND_TAG="${{ env.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REPOSITORY }}/frontend"
-          docker build -t $FRONTEND_TAG:latest -t $FRONTEND_TAG:${{ github.sha }} ./frontend
+          docker build --build-arg NEXT_PUBLIC_API_URL="http://${{ secrets.VM_HOST }}:8000" -t $FRONTEND_TAG:latest -t $FRONTEND_TAG:${{ github.sha }} ./frontend
           docker push $FRONTEND_TAG:latest
           docker push $FRONTEND_TAG:${{ github.sha }}
 
