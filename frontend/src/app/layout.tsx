@@ -24,27 +24,22 @@ export default function RootLayout({
       <body>
         <div className="app-container">
           <header className="main-navbar">
-            <div className="navbar-logo" onClick={() => { if (typeof window !== "undefined") window.location.href = "/"; }}>
+            <a href="/" className="navbar-logo" style={{ textDecoration: "none" }}>
               <span className="logo-accent">Form</span>Craft
-            </div>
+            </a>
             <nav className="navbar-links">
               {/* Navigation links will dynamically render or handle routing */}
-              <button
+              <a
+                href="/dashboard"
                 className="nav-btn-text"
-                onClick={() => { if (typeof window !== "undefined") window.location.href = "/dashboard"; }}
+                style={{ textDecoration: "none" }}
               >
                 Dashboard
-              </button>
+              </a>
               <button
                 id="nav-logout-btn"
                 className="nav-btn-outline"
                 style={{ display: "none" }}
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    localStorage.removeItem("auth_token");
-                    window.location.href = "/login";
-                  }
-                }}
               >
                 Sign Out
               </button>
@@ -65,7 +60,13 @@ export default function RootLayout({
                   const token = localStorage.getItem("auth_token");
                   if (token) {
                     const btn = document.getElementById("nav-logout-btn");
-                    if (btn) btn.style.display = "block";
+                    if (btn) {
+                      btn.style.display = "block";
+                      btn.addEventListener("click", function() {
+                        localStorage.removeItem("auth_token");
+                        window.location.href = "/login";
+                      });
+                    }
                   }
                 } catch (e) {}
               })();

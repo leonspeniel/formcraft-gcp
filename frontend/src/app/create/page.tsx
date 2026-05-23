@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getMe } from "../services/auth";
+import { getMe } from "../../services/auth";
 import FormBuilder from "../../components/FormBuilder";
 
 export default function CreateFormPage() {

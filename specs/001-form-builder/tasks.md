@@ -97,12 +97,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T024 [P] [US3] Create Submission and Answer database models inside `/backend/src/models/submission.py`
-- [ ] T025 [P] [US3] Implement Submission and Answer validation schemas in `/backend/src/schemas/submission.py`
-- [ ] T026 [US3] Create public Form retriever and Submission post router at `/backend/src/api/fills.py`
-- [ ] T027 [P] [US3] Build dynamic Question Rendering component inside `/frontend/src/components/FormViewer.tsx`
-- [ ] T028 [P] [US3] Create dynamic route wrapper page for form filling at `/frontend/src/app/fill/[id]/page.tsx`
-- [ ] T029 [US3] Integrate public form response dispatcher scripts inside `/frontend/src/services/fills.ts`
+- [x] T024 [P] [US3] Create Submission and Answer database models inside `/backend/src/models/submission.py`
+- [x] T025 [P] [US3] Implement Submission and Answer validation schemas in `/backend/src/schemas/submission.py`
+- [x] T026 [US3] Create public Form retriever and Submission post router at `/backend/src/api/fills.py`
+- [x] T027 [P] [US3] Build dynamic Question Rendering component inside `/frontend/src/components/FormViewer.tsx`
+- [x] T028 [P] [US3] Create dynamic route wrapper page for form filling at `/frontend/src/app/fill/[id]/page.tsx`
+- [x] T029 [US3] Integrate public form response dispatcher scripts inside `/frontend/src/services/fills.ts`
 
 **Checkpoint**: All user stories should now be independently functional.
 
