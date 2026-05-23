@@ -27,10 +27,10 @@ app.include_router(forms_router)
 app.include_router(fills_router)
 app.include_router(dashboard_router)
 
-# Configure CORS Middleware allowing local frontend communication
+# Configure CORS Middleware allowing local development and deployed VM hosts dynamically
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origin_regex="https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
