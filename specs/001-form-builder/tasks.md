@@ -26,11 +26,11 @@
 
 **Purpose**: Initial project directory and environment configuration bootstrapping.
 
-- [ ] T001 Create core project layout folders `/frontend` and `/backend`
-- [ ] T002 Initialize Python FastAPI configuration and requirements at `/backend/requirements.txt`
-- [ ] T003 Initialize Next.js project with TypeScript and styling inside `/frontend/package.json`
-- [ ] T004 [P] Configure environment templates `/backend/.env.template` and `/frontend/.env.template`
-- [ ] T005 [P] Setup root orchestration file `/docker-compose.yml` for local development
+- [x] T001 Create core project layout folders `/frontend` and `/backend`
+- [x] T002 Initialize Python FastAPI configuration and requirements at `/backend/requirements.txt`
+- [x] T003 Initialize Next.js project with TypeScript and styling inside `/frontend/package.json`
+- [x] T004 [P] Configure environment templates `/backend/.env.template` and `/frontend/.env.template`
+- [x] T005 [P] Setup root orchestration file `/docker-compose.yml` for local development
 
 ---
 
