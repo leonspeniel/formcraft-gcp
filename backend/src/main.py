@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from src.api.auth import router as auth_router
 import logging
 
 # Configure centralized logging format
@@ -16,6 +17,9 @@ app = FastAPI(
     description="Stateless dual-app form builder and responder service",
     version="1.0.0"
 )
+
+# Register endpoints routers
+app.include_router(auth_router)
 
 # Configure CORS Middleware allowing local frontend communication
 app.add_middleware(

@@ -59,12 +59,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create User database model inside `/backend/src/models/user.py`
-- [ ] T013 [P] [US1] Implement User authentication validation schemas at `/backend/src/schemas/user.py`
-- [ ] T014 [US1] Create User registration and signin router endpoints in `/backend/src/api/auth.py`
-- [ ] T015 [P] [US1] Build Register page form UI component in `/frontend/src/app/signup/page.tsx`
-- [ ] T016 [P] [US1] Build Login page form UI component in `/frontend/src/app/login/page.tsx`
-- [ ] T017 [US1] Integrate client authorization API fetch scripts inside `/frontend/src/services/auth.ts`
+- [x] T012 [P] [US1] Create User database model inside `/backend/src/models/user.py`
+- [x] T013 [P] [US1] Implement User authentication validation schemas at `/backend/src/schemas/user.py`
+- [x] T014 [US1] Create User registration and signin router endpoints in `/backend/src/api/auth.py`
+- [x] T015 [P] [US1] Build Register page form UI component in `/frontend/src/app/signup/page.tsx`
+- [x] T016 [P] [US1] Build Login page form UI component in `/frontend/src/app/login/page.tsx`
+- [x] T017 [US1] Integrate client authorization API fetch scripts inside `/frontend/src/services/auth.ts`
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently.
 
