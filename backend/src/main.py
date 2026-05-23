@@ -5,6 +5,7 @@ from fastapi.exceptions import RequestValidationError
 from src.api.auth import router as auth_router
 from src.api.forms import router as forms_router
 from src.api.fills import router as fills_router
+from src.api.dashboard import router as dashboard_router
 import logging
 
 # Configure centralized logging format
@@ -24,6 +25,7 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(forms_router)
 app.include_router(fills_router)
+app.include_router(dashboard_router)
 
 # Configure CORS Middleware allowing local frontend communication
 app.add_middleware(
