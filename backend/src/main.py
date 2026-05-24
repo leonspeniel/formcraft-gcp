@@ -15,6 +15,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger("form-builder-backend")
 
+# Import database engine and metadata Base
+from src.database import Base, engine
+# Import all SQLAlchemy models to register them with metadata before creation
+from src.models.user import User
+from src.models.form import Form, Question
+from src.models.submission import Submission, Answer
+
+# Dynamic database schema creation on application startup
+logger.info("Initializing database schemas and tables...")
+try:
+    Base.metadata.create_all(bind=engine)
+    logger.info("Database schemas and tables created successfully.")
+except Exception as e:
+    logger.error(f"Error creating database tables: {e}", exc_info=True)
+
 app = FastAPI(
     title="Form Builder API",
     description="Stateless dual-app form builder and responder service",
