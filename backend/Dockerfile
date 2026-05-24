@@ -16,5 +16,5 @@ COPY alembic.ini /app/
 
 EXPOSE 8000
 
-# Start the uvicorn API web server
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start the migrations and uvicorn API web server
+CMD ["sh", "-c", "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
